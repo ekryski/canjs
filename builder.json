@@ -273,6 +273,17 @@
 					}
 				}
 			}
+		},
+		"domless": {
+			"description": "DOM-less",
+			"library": "can/util/domless/domless.js",
+			"steal": {
+				"map": {
+					"*": {
+						"can/util/util.js": "can/util/domless/domless.js"
+					}
+				}
+			}
 		}
 	}
 }
