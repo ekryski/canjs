@@ -37,7 +37,7 @@ steal('can/util', 'can/util/bind','./bubble.js', 'can/construct', 'can/util/batc
 					}
 					// a list of the compute properties
 					this._computes = [];
-					
+
 					for (var prop in this.prototype) {
 						if (prop !== "define" && typeof this.prototype[prop] !== "function") {
 							this.defaults[prop] = this.prototype[prop];
@@ -74,6 +74,23 @@ steal('can/util', 'can/util/bind','./bubble.js', 'can/construct', 'can/util/batc
 					}
 					return can.isArray(attr) ? attr : ("" + attr)
 						.split(".");
+				},
+
+				/**
+				 * @hide
+				 * Checks if attribute name has a dot in it
+				 * @param {String|Array} attr attribute name
+				 * @return {Boolean}
+				 */
+				 // ## can.Map.helpers.attrHasDot
+				 // Checks if attribute name has a dot in it
+				attrHasDot: function(attr){
+					// The key can be a String or Array so to support all browsers we
+					return can.isArray(attr) ?
+					// use can.inArray for Arrays
+					can.inArray('.', attr) !== -1 :
+					// or indexOf for Strings
+					!!~attr.indexOf('.');
 				},
 
 				addToMap: function (obj, instance) {
@@ -332,7 +349,7 @@ steal('can/util', 'can/util/bind','./bubble.js', 'can/construct', 'can/util/batc
 					type: attr,
 					batchNum: ev.batchNum
 				}, [newVal, oldVal]);
-				
+
 				if(how === "remove" || how === "add") {
 					can.batch.trigger(this, {
 						type: "__keys",
@@ -575,8 +592,7 @@ steal('can/util', 'can/util/bind','./bubble.js', 'can/construct', 'can/util/batc
 				if (parts.length && current) {
 					return current.removeAttr(parts);
 				} else {
-
-					if (!!~attr.indexOf('.')) {
+					if (Map.helpers.attrHasDot(attr)) {
 						prop = attr;
 					}
 
@@ -639,7 +655,7 @@ steal('can/util', 'can/util/bind','./bubble.js', 'can/construct', 'can/util/batc
 			__type: function(value, prop){
 				// If we are getting an object.
 				if (!( value instanceof can.Map) && can.Map.helpers.canMakeObserve(value)  ) {
-					
+
 					var cached = getMapFromObject(value);
 					if(cached) {
 						return cached;
@@ -674,7 +690,7 @@ steal('can/util', 'can/util/bind','./bubble.js', 'can/construct', 'can/util/batc
 					if (this.__convert) {
 						value = this.__convert(prop, value);
 					}
-					
+
 					this.__set(prop, this.__type(value, prop), current);
 				} else {
 					throw "can.Map: Object does not exist";
@@ -885,7 +901,7 @@ steal('can/util', 'can/util/bind','./bubble.js', 'can/construct', 'can/util/batc
 				}
 				this.constructor._bubble.unbind(this, eventName);
 
-				
+
 				return can.unbindAndTeardown.apply(this, arguments);
 
 			},
