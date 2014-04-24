@@ -67,9 +67,7 @@ steal("can/view/stache", "can/view","can/test",function(){
 	
 	test("a section helper", function(){
 		
-		
 		can.stache.registerHelper("helper", function(options){
-			
 			return options.fn({message: "World"});
 			
 		});
@@ -186,7 +184,7 @@ steal("can/view/stache", "can/view","can/test",function(){
 			// Stashe does not needs to escape .nodeValues of text nodes
 			'HTML Escaping' : "These characters should be HTML escaped: & \" < >\n",
 			'Triple Mustache' : "These characters should not be HTML escaped: & \" < >\n",
-			'Ampersand' : "These characters should not be HTML escaped: & \" < >\n",
+			'Ampersand' : "These characters should not be HTML escaped: & \" < >\n"
 		},
 		inverted: {
 			'Standalone Line Endings': '|\n\n|',
@@ -196,7 +194,7 @@ steal("can/view/stache", "can/view","can/test",function(){
 			'Standalone Line Endings': '|\n>\n|',
 			'Standalone Without Newline': '>\n  >\n>',
 			'Standalone Without Previous Line': '  >\n>\n>',
-			'Standalone Indentation': '\\\n |\n<\n->\n|\n\n/\n',
+			'Standalone Indentation': '\\\n |\n<\n->\n|\n\n/\n'
 		},
 		sections: {
 			'Standalone Line Endings': '|\n\n|',
