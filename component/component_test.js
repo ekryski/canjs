@@ -1081,8 +1081,12 @@ steal("can/component", function () {
 		template();
 		
 		window.tempMap.attr("prop","value");
-		
-		delete window.tempMap;
+		// IE 6-8 throws an error when deleting globals created via assignment: 
+		// http://perfectionkills.com/understanding-delete/#ie_bugs
+		window.tempMap = undefined;
+		try{
+			delete window.tempMap;
+		} catch(e) {}
 	});
 
 	test('Same component tag nested', function () {
