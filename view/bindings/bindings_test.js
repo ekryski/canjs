@@ -142,4 +142,13 @@ steal("can/view/bindings", "can/map", "can/test", function () {
 		equal(input.checked, false, 'checkbox value bound (via uncheck)');
 		equal(data.attr('completed'), false, 'checkbox value bound (via uncheck)');
 	});
+	test('radio type conversion (#811)', function(){
+		var data = new can.Map({
+			id: 1
+		}),
+			frag = can.view.mustache('<input type="radio" can-value="id" value="1"/>')(data);
+		can.append(can.$('#qunit-test-area'), frag);
+		var input = can.$('#qunit-test-area')[0].getElementsByTagName('input')[0];
+		ok(input.checked, 'checkbox value bound');
+	})
 });
