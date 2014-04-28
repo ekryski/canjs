@@ -150,5 +150,5 @@ steal("can/view/bindings", "can/map", "can/test", function () {
 		can.append(can.$('#qunit-test-area'), frag);
 		var input = can.$('#qunit-test-area')[0].getElementsByTagName('input')[0];
 		ok(input.checked, 'checkbox value bound');
-	})
+	});
 });
